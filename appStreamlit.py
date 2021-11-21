@@ -28,7 +28,7 @@ st.markdown('---')
 '''
 ## Quantidade de participações na pesquisa
 '''
-campo_qtde = st.selectbox('Selecione uma variável para obter a média', ['Idade', 'Profissão', 'Escolaridade', 'Setor de Mercado', 'Estado'])
+campo_qtde = st.selectbox('Selecione uma variável para ver a participação na pesquisa', ['Idade', 'Profissão', 'Escolaridade', 'Setor de Mercado', 'Estado'])
 plot = dados[campo_qtde].value_counts().plot(kind = 'barh')
 st.pyplot(plot.figure)
 
