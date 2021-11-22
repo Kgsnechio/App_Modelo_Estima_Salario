@@ -18,9 +18,8 @@ st.markdown('---')
 st.markdown('---') 
 campo = st.selectbox('Selecione uma variável para obter a média sálarial e as quantidades de participações na pesquisa', ['Idade', 'Profissão', 'Escolaridade', 'Setor de Mercado', 'Estado'])
 
-plot = dados['Salário'].groupBy(dados[campo]).mean().plot(kind = 'barh')
+plot = dados['Salário'].groupby(dados[campo]).mean().plot(kind = 'barh')
 st.pyplot(plot.figure)
-
 
 st.markdown('---')
 
