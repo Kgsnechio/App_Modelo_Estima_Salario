@@ -147,7 +147,7 @@ dicionario  =  {'Idade': [x1],
 
 dados = pd.DataFrame(dicionario)  
 
-st.markdown('## **Quando terminar de preencher as informações da pessoa, clique no botão abaixo para estimar o salário de tal profissional**') 
+st.markdown('## **Clique no botão abaixo para estimar o salário**') 
 
 if st.button('EXECUTAR O MODELO'):
 
