@@ -2,12 +2,18 @@ import streamlit as st
 import pandas as pd 
 from pycaret.classification import load_model, predict_model
 
-st.set_page_config(page_title = 'Estimar os Salários', 
-				   page_icon = 'icon.jpg')
+st.set_page_config(page_title = 'Estimar os Salários')
 
 st.image('capa.jpg', use_column_width = 'always')
 
-dados = pd.read_csv('dados_proficoes_resumo.csv')
+@st.cache
+def ler_dados():
+	dados = pd.read_csv('prof-dados-resumido.csv')
+	dados = dados.dropna()
+	return dados
+
+dados = ler_dados()  
+
 modelo = load_model('modelo_previsao_salarios')
 
 st.markdown('# Modelo para Estimar os Salários de Colaboradores na Área de Dados')
