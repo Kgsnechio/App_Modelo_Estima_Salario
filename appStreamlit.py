@@ -1,19 +1,20 @@
 import streamlit as st 
 import pandas as pd 
-#from pycaret.classification import load_model, predict_model
+from pycaret.classification import load_model, predict_model
 
 dados = pd.read_csv('dados_proficoes_resumo.csv')
-#modelo = load_model('modelo_previsao_salarios')
+modelo = load_model('modelo_previsao_salarios')
 
 st.markdown('# Modelo para Estimar os Salários de Colaboradores na Área de Dados')
-st.markdown('<font color=gray size=10>*Esses dados foram obtidos em kaggle.com*</font>')
+
+
 st.markdown('---') 
 st.markdown('## Conjunto de dados *Pesquisa de proficionais na área de Dados em 2019*')
+st.markdown(<font color=gray size=10>'*Esses dados foram obtidos em kaggle.com*'</font>)
 st.write(dados)
+
 st.markdown('---') 
 st.write('No geral a média salárial para quem trabalha com dados é de **R$ {:.2f}**'.format(dados['Salário'].mean()))
-st.markdown('---') 
-
 
 st.markdown('---') 
 campo = st.selectbox('Selecione uma variável para obter a média sálarial e as quantidades de participações na pesquisa', ['Idade', 'Profissão', 'Escolaridade', 'Setor de Mercado', 'Estado'])
@@ -65,42 +66,41 @@ x7 = col2.radio('Escolaridade', ['Não tenho graduação formal',
 								'Prefiro não informar'] )
 
 x8 = col3.selectbox('Área de Formação', ['Ciências Sociais',
- 'Computação / Engenharia de Software / Sistemas de Informação',
- 'Economia/ Administração / Contabilidade / Finanças',
- 'Estatística/ Matemática / Matemática Computacional',
- 'Marketing / Publicidade / Comunicação / Jornalismo',
- 'Outras Engenharias',
- 'Química / Física',
- 'Outras'])
+										'Computação / Engenharia de Software / Sistemas de Informação',
+										'Economia/ Administração / Contabilidade / Finanças',
+										'Estatística/ Matemática / Matemática Computacional',
+										'Marketing / Publicidade / Comunicação / Jornalismo',
+										'Outras Engenharias',
+										'Química / Física',
+										'Outras'])
 
-x9 = col3.selectbox('Setor de Mercado', [
-					'Agronegócios',
- 					'Educação',
- 					'Entretenimento ou Esportes',
- 					'Finanças ou Bancos',
- 					'Indústria (Manufatura)',
- 					'Internet/Ecommerce',
- 					'Marketing',
- 					'Área da Saúde',
- 					'Seguros ou Previdência',
- 					'Setor Alimentício',
- 					'Setor Automotivo',
- 					'Setor Farmaceutico',
- 					'Setor Público',
- 					'Tecnologia/Fábrica de Software',
- 					'Telecomunicação',
- 					'Varejo',
- 					'Outras'])
+x9 = col3.selectbox('Setor de Mercado', ['Agronegócios',
+ 										'Educação',
+ 										'Entretenimento ou Esportes',
+ 										'Finanças ou Bancos',
+ 										'Indústria (Manufatura)',
+ 										'Internet/Ecommerce',
+ 										'Marketing',
+ 										'Área da Saúde',
+ 										'Seguros ou Previdência',
+ 										'Setor Alimentício',
+ 										'Setor Automotivo',
+ 										'Setor Farmaceutico',
+ 										'Setor Público',
+ 										'Tecnologia/Fábrica de Software',
+ 										'Telecomunicação',
+ 										'Varejo',
+ 										'Outras'])
 
 x10 = 1
 
 x11 = col2.radio('Estado', ['Espírito Santo (ES)',
- 'Minas Gerais (MG)',
- 'Paraná (PR)',
- 'Rio Grande do Sul (RS)',
- 'Rio de Janeiro (RJ)',
- 'Santa Catarina (SC)',
- 'São Paulo (SP)']) 
+							'Minas Gerais (MG)',
+							'Paraná (PR)',
+							'Rio Grande do Sul (RS)',
+							'Rio de Janeiro (RJ)',
+							'Santa Catarina (SC)',
+							'São Paulo (SP)']) 
 
 x12 = col3.radio('Linguagem Python', ['Sim', 'Não']) 
 
