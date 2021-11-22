@@ -18,13 +18,8 @@ st.markdown('---')
 st.markdown('---') 
 campo = st.selectbox('Selecione uma variável para obter a média sálarial e as quantidades de participações na pesquisa', ['Idade', 'Profissão', 'Escolaridade', 'Setor de Mercado', 'Estado'])
 
-colA, colB = st.columns(2)
-
-tabela_media = dados['Salário'].groupby(dados[campo]).mean()
-colA = st.write(tabela_media)
-
-plot = dados[campo].value_counts().plot(kind = 'barh')
-colB = st.pyplot(plot.figure)
+plot = dados['Salário'].groupBy(dados[campo]).mean().plot(kind = 'barh')
+st.pyplot(plot.figure)
 
 
 st.markdown('---')
@@ -77,8 +72,7 @@ x8 = col3.selectbox('Área de Formação', ['Ciências Sociais',
  'Marketing / Publicidade / Comunicação / Jornalismo',
  'Outras Engenharias',
  'Química / Física',
- 'Outras',
- 'Nenhuma'])
+ 'Outras'])
 
 x9 = col3.selectbox('Setor de Mercado', [
 					'Agronegócios',
@@ -107,8 +101,7 @@ x11 = col2.radio('Estado', ['Espírito Santo (ES)',
  'Rio Grande do Sul (RS)',
  'Rio de Janeiro (RJ)',
  'Santa Catarina (SC)',
- 'São Paulo (SP)',
- 'Outro']) 
+ 'São Paulo (SP)']) 
 
 x12 = col3.radio('Linguagem Python', ['Sim', 'Não']) 
 
@@ -128,11 +121,6 @@ x12 = resposta_binaria (x12)
 x13 = resposta_binaria (x13)
 x14 = resposta_binaria (x14)
 
-if x8 == 'Nenhuma':
-	x8 = nan
-
-if x11 == 'Outro':
-	x11 = nan
 
 idades = {'18 a 24 anos':'[18,24]','25 a 30 anos':'[25,30]','31 a 40 anos':'[31,40]','41 a 50 anos':'[41,50]'}
 
