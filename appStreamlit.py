@@ -16,14 +16,14 @@ st.markdown('---')
 
 
 st.markdown('---') 
-campo_media = st.selectbox('Selecione uma variável para obter a média sálarial e as quantidades de participações na pesquisa', ['Idade', 'Profissão', 'Escolaridade', 'Setor de Mercado', 'Estado'])
+campo = st.selectbox('Selecione uma variável para obter a média sálarial e as quantidades de participações na pesquisa', ['Idade', 'Profissão', 'Escolaridade', 'Setor de Mercado', 'Estado'])
 
 colA, colB = st.columns(2)
 
-tabela_media = dados['Salário'].groupby(dados[campo_media]).mean()
+tabela_media = dados['Salário'].groupby(dados[campo]).mean()
 colA = st.write(tabela_media)
 
-plot = dados[campo_qtde].value_counts().plot(kind = 'barh')
+plot = dados[campo].value_counts().plot(kind = 'barh')
 colB = st.pyplot(plot.figure)
 
 
