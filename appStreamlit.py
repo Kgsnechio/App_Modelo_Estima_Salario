@@ -7,9 +7,11 @@ st.set_page_config(page_title = 'Estimar os Salários')
 st.image('capa.jpg', use_column_width = 'always')
 
 @st.cache
+def ler_dados():
+	dados = pd.read_csv('dados_profissoes_resumo.csv')
+	return dados
 
-dados = pd.read_csv('dados_profissoes_resumo.csv')
- 
+dados = ler_dados()  
 
 modelo = load_model('modelo_previsao_salarios')
 
@@ -19,7 +21,7 @@ st.markdown('# Modelo para Estimar os Salários de Colaboradores na Área de Dad
 st.markdown('---') 
 st.markdown('## Conjunto de dados *Pesquisa de proficionais na área de Dados em 2019*')
 st.markdown('Esses dados foram obtidos em *https://www.kaggle.com/*')
-st.write(dados)
+st.write(dados.dropna())
 
 st.markdown('---') 
 st.write('No geral a média salárial para quem trabalha com dados é de **R$ {:.2f}**'.format(dados['Salário'].mean()))
