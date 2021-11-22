@@ -7,12 +7,9 @@ st.set_page_config(page_title = 'Estimar os Salários')
 st.image('capa.jpg', use_column_width = 'always')
 
 @st.cache
-def ler_dados():
-	dados = pd.read_csv('dados_profissoes_resumo.csv')
-	dados = dados.dropna()
-	return dados
 
-dados = ler_dados()  
+dados = pd.read_csv('dados_profissoes_resumo.csv')
+ 
 
 modelo = load_model('modelo_previsao_salarios')
 
