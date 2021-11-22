@@ -1,59 +1,142 @@
 import streamlit as st 
 import pandas as pd 
-from pycaret.classification import load_model, predict_model
+#from pycaret.classification import load_model, predict_model
 
 dados = pd.read_csv('dados_proficoes_resumo.csv')
-modelo = load_model('modelo_previsao_salarios')
+#modelo = load_model('modelo_previsao_salarios')
 
 st.markdown('# Modelo para Estimar os Salários de Colaboradores na Área de Dados')
-
+st.markdown('<font color=gray size=10>*Esses dados foram obtidos em kaggle.com*</font>')
 st.markdown('---') 
 st.markdown('## Conjunto de dados *Pesquisa de proficionais na área de Dados em 2019*')
 st.write(dados)
 st.markdown('---') 
-st.write('A média salárial para quem trabalha com dados é  **R$ {:.2f}**'.format(dados['Salário'].mean()))
+st.write('No geral a média salárial para quem trabalha com dados é de **R$ {:.2f}**'.format(dados['Salário'].mean()))
+st.markdown('---') 
+
 
 st.markdown('---') 
-'''
-## Descrição dos dados
-'''
-st.table(dados['Salário'].describe())
+campo_media = st.selectbox('Selecione uma variável para obter a média sálarial e as quantidades de participações na pesquisa', ['Idade', 'Profissão', 'Escolaridade', 'Setor de Mercado', 'Estado'])
 
-st.markdown('---') 
-campo_media = st.selectbox('Selecione uma variável para obter a média', ['Idade', 'Profissão', 'Escolaridade', 'Setor de Mercado', 'Estado'])
+colA, colB = st.columns(2)
+
 tabela_media = dados['Salário'].groupby(dados[campo_media]).mean()
-st.write(tabela_media)
-st.markdown('---') 
+colA = st.write(tabela_media)
 
-'''
-## Quantidade de participações na pesquisa
-'''
-campo_qtde = st.selectbox('Selecione uma variável para ver a participação na pesquisa', ['Idade', 'Profissão', 'Escolaridade', 'Setor de Mercado', 'Estado'])
 plot = dados[campo_qtde].value_counts().plot(kind = 'barh')
-st.pyplot(plot.figure)
+colB = st.pyplot(plot.figure)
+
 
 st.markdown('---')
+
 st.markdown('## **Modelo para Estimar o Salário de Profissionais da área de Dados**')
-st.markdown('Utilize as variáveis abaixo para utilizar o modelo de previsão de salários desenvolvido abaixo.')
+st.markdown('Selecione as variáveis abaixo para utilizar o modelo de previsão de salários.')
 st.markdown('---')
 
 col1, col2, col3 = st.columns(3)
 
-x1 = col1.radio('Idade', dados['Idade'].unique().tolist() )
-x2 = col1.radio('Profissão', dados['Profissão'].unique().tolist())
-x3 = col1.radio('Tamanho da Empresa', dados['Tamanho da Empresa'].unique().tolist())
-x4 = col1.radio('Cargo de Gestão', dados['Cargo de Gestão'].unique().tolist())
-x5 = col3.selectbox('Experiência em DS', dados['Experiência em DS'].unique().tolist()) 
-x6 = col2.radio('Tipo de Trabalho', dados['Tipo de Trabalho'].unique().tolist() )
-x7 = col2.radio('Escolaridade', dados['Escolaridade'].unique().tolist())
-x8 = col3.selectbox('Área de Formação', dados['Área de Formação'].unique().tolist())
-x9 = col3.selectbox('Setor de Mercado', dados['Setor de Mercado'].unique().tolist())
+x1 = col1.radio('Idade', ['18 a 24 anos', '25 a 30 anos', '31 a 40 anos', '41 a 50 anos'] )
+
+x2 = col1.radio('Profissão', ['Analista de BI',
+ 							 'Analista de Dados',
+							 'Cientista de Dados',
+							 'Desenvolvedor/Engenheiro de Software',
+							 'Engenheiro de Dados',
+							 'Outras'])
+
+x3 = col1.radio('Tamanho da Empresa', ['Pequena', 'Media', 'Grande'])
+
+x4 = col1.radio('Cargo de Gestão', ['Sim', 'Não'])
+
+x5 = col3.selectbox('Experiência em DS', ['Não tenho experiência na área de dados',
+										'Menos de 1 ano',
+										'de 1 a 2 anos',
+ 										'de 4 a 5 anos',
+										'de 2 a 3 anos',
+										'de 6 a 10 anos'
+										'Mais de 10 anos']) 
+
+x6 = col2.radio('Tipo de Trabalho', ['Estagiário',
+									'Empregado (CTL)',
+									'Empreendedor ou Empregado (CNPJ)',
+									'Outros'] )
+
+
+x7 = col2.radio('Escolaridade', ['Não tenho graduação formal',
+								'Estudante de Graduação',
+ 								'Graduação/Bacharelado',
+								'Pós-graduação',
+								'Mestrado',
+								'Doutorado ou Phd',
+								'Prefiro não informar'] )
+
+x8 = col3.selectbox('Área de Formação', ['Ciências Sociais',
+ 'Computação / Engenharia de Software / Sistemas de Informação',
+ 'Economia/ Administração / Contabilidade / Finanças',
+ 'Estatística/ Matemática / Matemática Computacional',
+ 'Marketing / Publicidade / Comunicação / Jornalismo',
+ 'Outras Engenharias',
+ 'Química / Física',
+ 'Outras',
+ 'Nenhuma'])
+
+x9 = col3.selectbox('Setor de Mercado', [
+					'Agronegócios',
+ 					'Educação',
+ 					'Entretenimento ou Esportes',
+ 					'Finanças ou Bancos',
+ 					'Indústria (Manufatura)',
+ 					'Internet/Ecommerce',
+ 					'Marketing',
+ 					'Área da Saúde',
+ 					'Seguros ou Previdência',
+ 					'Setor Alimentício',
+ 					'Setor Automotivo',
+ 					'Setor Farmaceutico',
+ 					'Setor Público',
+ 					'Tecnologia/Fábrica de Software',
+ 					'Telecomunicação',
+ 					'Varejo',
+ 					'Outras'])
+
 x10 = 1
-x11 = col2.radio('Estado', dados['Estado'].unique().tolist()) 
-x12 = col3.radio('Linguagem Python', dados['Linguagem Python'].unique().tolist()) 
-x13 = col3.radio('Linguagem R', dados['Linguagem R'].unique().tolist()) 
-x14 = col3.radio('Linguagem SQL', dados['Linguagem SQL'].unique().tolist()) 
-	 
+
+x11 = col2.radio('Estado', ['Espírito Santo (ES)',
+ 'Minas Gerais (MG)',
+ 'Paraná (PR)',
+ 'Rio Grande do Sul (RS)',
+ 'Rio de Janeiro (RJ)',
+ 'Santa Catarina (SC)',
+ 'São Paulo (SP)',
+ 'Outro']) 
+
+x12 = col3.radio('Linguagem Python', ['Sim', 'Não']) 
+
+x13 = col3.radio('Linguagem R', ['Sim', 'Não']) 
+
+x14 = col3.radio('Linguagem SQL', ['Sim', 'Não']) 
+	
+#Tratando respostas
+def resposta_binaria (resp):
+	if resp = 'Sim':
+		return 1
+	else:
+		return 0
+
+x4 = resposta_binaria (x4)
+x12 = resposta_binaria (x12)
+x13 = resposta_binaria (x13)
+x14 = resposta_binaria (x14)
+
+if x8 = 'Nenhuma':
+	x8 = nan
+
+if x11 = 'Outro':
+	x11 = nan
+
+idades = {'18 a 24 anos':'[18,24]','25 a 30 anos':'[25,30]','31 a 40 anos':'[31,40]','41 a 50 anos':'[41,50]'}
+
+x1 = idades[x1]
 
 dicionario  =  {'Idade': [x1],
 				'Profissão': [x2],
@@ -72,11 +155,10 @@ dicionario  =  {'Idade': [x1],
 
 dados = pd.DataFrame(dicionario)  
 
-st.markdown('---') 
 st.markdown('## **Quando terminar de preencher as informações da pessoa, clique no botão abaixo para estimar o salário de tal profissional**') 
 
-
 if st.button('EXECUTAR O MODELO'):
+
 	saida = float(predict_model(modelo, dados)['Label']) 
 	st.markdown('## Salário estimado de **R$ {:.2f}**'.format(saida))
 
