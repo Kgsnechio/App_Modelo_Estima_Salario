@@ -3,7 +3,9 @@ import pandas as pd
 from pycaret.classification import load_model, predict_model
 
 st.set_page_config(page_title = 'Estimar os Salários', 
-				   page_icon = 'capa.jpg')
+				   page_icon = 'icon.jpg')
+
+st.image('capa.jpg', use_column_width = 'always')
 
 dados = pd.read_csv('dados_proficoes_resumo.csv')
 modelo = load_model('modelo_previsao_salarios')
