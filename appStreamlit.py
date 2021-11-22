@@ -2,6 +2,10 @@ import streamlit as st
 import pandas as pd 
 from pycaret.classification import load_model, predict_model
 
+st.set_page_config(page_title = 'Estimar os Salários', 
+				   page_icon = 'capa.jpg' ,
+				   layout = 'centered')
+
 dados = pd.read_csv('dados_proficoes_resumo.csv')
 modelo = load_model('modelo_previsao_salarios')
 
@@ -10,7 +14,7 @@ st.markdown('# Modelo para Estimar os Salários de Colaboradores na Área de Dad
 
 st.markdown('---') 
 st.markdown('## Conjunto de dados *Pesquisa de proficionais na área de Dados em 2019*')
-st.markdown(<font color=gray size=10>'*Esses dados foram obtidos em kaggle.com*'</font>)
+st.markdown('Esses dados foram obtidos em *https://www.kaggle.com/*')
 st.write(dados)
 
 st.markdown('---') 
@@ -150,3 +154,5 @@ if st.button('EXECUTAR O MODELO'):
 	st.markdown('## Salário estimado de **R$ {:.2f}**'.format(saida))
 
 st.markdown('---') 
+
+st.markdown('Criado por André Nechio - Disponivel em [GitHub](https://github.com/Kgsnechio/App_Modelo_Estima_Salario)')
