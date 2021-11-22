@@ -58,7 +58,7 @@ x5 = col3.selectbox('Experiência em DS', ['Não tenho experiência na área de 
 										'de 1 a 2 anos',
  										'de 4 a 5 anos',
 										'de 2 a 3 anos',
-										'de 6 a 10 anos'
+										'de 6 a 10 anos',
 										'Mais de 10 anos']) 
 
 x6 = col2.radio('Tipo de Trabalho', ['Estagiário',
