@@ -118,7 +118,7 @@ x14 = col3.radio('Linguagem SQL', ['Sim', 'Não'])
 	
 #Tratando respostas
 def resposta_binaria (resp):
-	if resp = 'Sim':
+	if resp == 'Sim':
 		return 1
 	else:
 		return 0
@@ -128,10 +128,10 @@ x12 = resposta_binaria (x12)
 x13 = resposta_binaria (x13)
 x14 = resposta_binaria (x14)
 
-if x8 = 'Nenhuma':
+if x8 == 'Nenhuma':
 	x8 = nan
 
-if x11 = 'Outro':
+if x11 == 'Outro':
 	x11 = nan
 
 idades = {'18 a 24 anos':'[18,24]','25 a 30 anos':'[25,30]','31 a 40 anos':'[31,40]','41 a 50 anos':'[41,50]'}
